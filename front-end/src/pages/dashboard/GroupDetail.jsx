@@ -5,7 +5,8 @@ import { apiFetch, uploadFileWithProgress } from "../../utils/api";
 import { useAuth } from "../../context/AuthContext";
 
 export function GroupDetail() {
-  const BACKEND_URL = (import.meta.env.VITE_API_URL || "http://localhost:8000/api").replace(/\/api$/, "");
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+  const BACKEND_URL = apiUrl.endsWith("/api") ? apiUrl.slice(0, -4) : apiUrl.replace(/\/$/, "");
 
   const { groupId } = useParams();
   const { user } = useAuth();

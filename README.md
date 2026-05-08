@@ -13,7 +13,7 @@ Deployment notes for **Render (backend)** + **Vercel (frontend)**.
 You can use the included `render.yaml` blueprint or set these in Render UI.
 
 ### Required environment variables
-Copy `/home/runner/work/Nanotransfersystem/Nanotransfersystem/backend/.env.example` and set:
+Copy `backend/.env.example` and set:
 - `SECRET_KEY` (required)
 - `DB_URL` (MySQL URL, e.g. `mysql+pymysql://user:pass@host:3306/db`)
 - `FRONTEND_URL` (your Vercel URL, e.g. `https://your-app.vercel.app`)
@@ -32,7 +32,7 @@ Optional:
 SPA rewrites are already configured in `front-end/vercel.json`.
 
 ### Required environment variables
-Copy `/home/runner/work/Nanotransfersystem/Nanotransfersystem/front-end/.env.example` and set:
+Copy `front-end/.env.example` and set:
 - `VITE_API_URL=https://your-backend.onrender.com/api`
 
 ## Free-tier deployment caveats
