@@ -5,8 +5,11 @@ import { apiFetch, uploadFileWithProgress } from "../../utils/api";
 import { useAuth } from "../../context/AuthContext";
 
 export function GroupDetail() {
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
-  const BACKEND_URL = apiUrl.endsWith("/api") ? apiUrl.slice(0, -4) : apiUrl.replace(/\/$/, "");
+  const viteApiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+  const normalizedApiUrl = viteApiUrl.replace(/\/+$/, "");
+  const apiMarkerIndex = normalizedApiUrl.indexOf("/api");
+  const BACKEND_URL =
+    apiMarkerIndex === -1 ? normalizedApiUrl : normalizedApiUrl.slice(0, apiMarkerIndex);
 
   const { groupId } = useParams();
   const { user } = useAuth();
