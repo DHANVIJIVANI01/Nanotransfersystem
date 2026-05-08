@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: nanotransfersystem-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app.main:app -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    healthCheckPath: /api/
+    envVars:
+      - key: SECRET_KEY
+        sync: false
+      - key: DB_URL
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: UPLOAD_DIR
+        value: uploads
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+      - key: SMTP_FROM_EMAIL
+        sync: false
