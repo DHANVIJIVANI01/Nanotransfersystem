@@ -4,8 +4,15 @@ import { ArrowLeft, Send, Paperclip, Star, Smile, Users, Info, MoreVertical, Fil
 import { apiFetch, uploadFileWithProgress } from "../../utils/api";
 import { useAuth } from "../../context/AuthContext";
 
+const extractBackendBaseUrl = (apiBaseUrl) => {
+  const normalizedApiUrl = apiBaseUrl.replace(/\/+$/, "");
+  const apiMarkerIndex = normalizedApiUrl.indexOf("/api");
+  return apiMarkerIndex === -1 ? normalizedApiUrl : normalizedApiUrl.slice(0, apiMarkerIndex);
+};
+
 export function GroupDetail() {
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+  const viteApiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+  const BACKEND_URL = extractBackendBaseUrl(viteApiUrl);
 
   const { groupId } = useParams();
   const { user } = useAuth();
